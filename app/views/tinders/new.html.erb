@@ -1,4 +1,3 @@
-
 <div class="row" style='margin-top: 10px'>
 	<div class="col-md-5 col-md-offset-1">
 		<div class="panel panel-primary">
@@ -22,6 +21,12 @@
 	    	<%= f.hidden_field :loser_id, :value => @right.deal_id %>
 		  </div>
 		  <% end %>
+	  	 <div class="panel-footer">
+	    	<span style='font-size: 9px; line-height: 10px'>
+	    		Created: <%= @left.created_at.strftime("%-m/%-d/%Y %l:%M %P") %><br>
+	    		Starting: <%= @left.offer_starts_at %>
+	    	</span>
+	    </div>
 		</div>
 	</div>
 	<div class="col-md-5">
@@ -46,6 +51,12 @@
 	    	<%= f.hidden_field :loser_id, :value => @left.deal_id %>
 		  </div>
 		  <% end %>
+	  	 <div class="panel-footer">
+	    	<span style='font-size: 9px; line-height: 10px'>
+	    		Created: <%= @right.created_at.strftime("%-m/%-d/%Y %l:%M %P") %><br>
+	    		Starting: <%= @right.offer_starts_at %>
+	    	</span>
+	    </div>
 		</div>
 	</div>
 </div>

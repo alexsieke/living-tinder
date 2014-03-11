@@ -2,9 +2,13 @@ class TindersController < ApplicationController
 
   # GET /tinders/new
   def new
+    if session[:current_user_id].nil?
+      redirect_to root_path
+    end
     @tinder = Tinder.new
-    @left = Deal.first(:order => "RANDOM()")
-    @right = Deal.last(:order => "RANDOM()")
+    @maxtime = Deal.maximum('created_at') - 1.day
+    @left = Deal.where('created_at >= ?', @maxtime).first(:order => "RANDOM()")
+    @right = Deal.where('created_at >= ?', @maxtime).last(:order => "RANDOM()")
   end
 
   # POST /tinders

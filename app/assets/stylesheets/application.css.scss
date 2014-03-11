@@ -36,3 +36,29 @@
 .overlay:hover{
 	opacity: 0.6;
 }
+
+/*HOME PAGE*/
+body { 
+  background: url(http://vicvapor.com/files/2014/02/Jefferson-Memorial-Washington-DC.jpg) no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+.vertical-offset-100{
+    padding-top:100px;
+}
+
+/*FORM*/
+.btn-radio {
+	width: 100%;
+}
+.img-radio {
+	opacity: 0.5;
+	margin-bottom: 5px;
+}
+
+.space-20 {
+    margin-top: 20px;
+}

@@ -1,0 +1,67 @@
+
+<div class="container">
+    <div class="row vertical-offset-100">
+    	<div class="col-md-4 col-md-offset-4">
+    		<div class="panel panel-default">
+			  	<div class="panel-heading">
+			    	<h3 class="panel-title">Start Tindering</h3>
+			 	</div>
+			  	<div class="panel-body">
+			    	<%= form_for(@user) do |f| %>
+			    	  <div class="form-group">
+			    	  		<%= f.label :name %>
+			    		    <%= f.text_field :name, :autofocus => true, class: "form-control" %>
+			    		</div>
+			    		<div class="form-group">
+			    	  		<%= f.label :dob, "Date of Birth" %>
+			    		    <%= f.date_field :dob, class: "form-control" %>
+			    		</div>
+			    		<div class="form-group">
+			    		<%= f.label :gender %>	
+			    		</div>	    		
+			    	  <div class="col-xs-6">
+        				<img id='male' src="http://www.mydailywallpaper.com/siteimg/cat_celebritiesmale.jpg" class="img-responsive img-radio">
+        				<button type="button" class="btn btn-primary btn-radio active">Male</button>
+        				<%= check_box_tag :gender, 'Male', false, class: 'hidden' %>
+        			</div>
+        			<div class="col-xs-6">
+        				<img id='female' src="http://www.colorandhaircut.com/thumbs/802634-Blondecelebrityhairstyles20131201ImageGallery743Amazing.jpg" class="img-responsive img-radio">
+        				<button type="button" class="btn btn-primary btn-radio">Female</button>
+        				<%= check_box_tag :gender, 'Female', false, class: 'hidden' %>
+        			</div>
+			    		<div class="form-group" style='clear:both; padding-top: 15px; margin-top: 0px'>
+			    			<input class="btn btn-lg btn-success btn-block" type="submit" value="Lets Go!">
+			    		</div>
+        			
+			      	<% end %>
+			    </div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script>
+$(function () {
+		<% if @user.gender == "Female" %>
+			$("#female").addClass('active')
+        .siblings('input').prop('checked',true)
+    		.siblings('.img-radio').css('opacity','1');
+		<% end %>
+		<% if @user.gender == "Male" %>
+			$("#male").addClass('active')
+        .siblings('input').prop('checked',true)
+    		.siblings('.img-radio').css('opacity','1');
+		<% end %>
+
+
+		$('.btn-radio').addClass('active')
+    $('.btn-radio').click(function(e) {
+        $('.btn-radio').not(this).removeClass('active')
+    		.siblings('input').prop('checked',false)
+            .siblings('.img-radio').css('opacity','0.5');
+    	$(this).addClass('active')
+            .siblings('input').prop('checked',true)
+    		.siblings('.img-radio').css('opacity','1');
+    });
+});
+</script>

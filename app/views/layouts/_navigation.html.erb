@@ -7,11 +7,15 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <%= link_to 'Home', root_path, class: 'navbar-brand' %>
+      <% if params[:controller] == "tinders" %>
+        <%= link_to 'Sign in as new user', root_path, class: 'navbar-brand' %>
+      <% end %>
     </div>
     <div class="collapse navbar-collapse">
       <ul class="nav navbar-nav">
-        <%= render 'layouts/navigation_links' %>
+        <% if !session[:current_user_id].nil? && params[:controller] == "tinders" %>
+          <li><a>Yo, <%= session[:current_user_name] %>, Time to Start Tindering</a></li>
+        <% end %>
       </ul>
     </div>
   </div>
