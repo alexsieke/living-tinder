@@ -1,0 +1,13 @@
+<%%= form_for(@<%= singular_table_name %>) do |f| %>
+  <div class="panel">
+  <% attributes.each do |attribute| -%>
+    <div class="form-group">
+      <%%= f.label :<%= attribute.column_name %>, ("<%= attribute.column_name %>".titlecase + " <span class='error'>" + @<%= singular_table_name %>.errors[:<%= attribute.column_name %>].join(", ") + "</span>").html_safe %>
+      <%%= f.<%= attribute.field_type %> :<%= attribute.column_name %>, :class => "form-control" %>
+    </div>
+   <% end %>
+    <div class="form-group">
+      <%%= f.submit :class => "btn btn-primary" %>
+    </div>
+  </div>
+<%% end %>

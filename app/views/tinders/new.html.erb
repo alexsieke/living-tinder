@@ -1,0 +1,60 @@
+
+<div class="row" style='margin-top: 10px'>
+	<div class="col-md-5 col-md-offset-1">
+		<div class="panel panel-primary">
+		  <div class="panel-heading">
+		    <h3 class="panel-title"><%= @left.short_title %></h3>
+		  </div>
+		  <%= form_for(@tinder) do |f| %>
+		  <div class="panel-body">
+		  	<div style='background: url(<%= @left.image_url%>); background-size: 100% 100%' class='div-submit' onclick='sub_left()'>
+		  		<div class='overlay'>
+		  			<i class="fa fa-thumbs-up"></i>
+		  		</div>
+		  	</div>
+		  	<p style='font-size: 17px; margin-top: 15px; font-weight: bold'><%= @left.merchant_name%></p>
+		  	<p style='color: #d35400; font-size: 26px;'>
+		  		<span style='text-decoration:line-through'><%= number_to_currency(@left.feature_value, :precision => 0) %></span>
+		  		<span style='font-weight: bold'><%= number_to_currency(@left.feature_price, :precision => 0) %></span>
+		  	</p>
+		  	<%= @left.description.html_safe %> 
+	    	<%= f.hidden_field :winner_id, :value => @left.deal_id %>
+	    	<%= f.hidden_field :loser_id, :value => @right.deal_id %>
+		  </div>
+		  <% end %>
+		</div>
+	</div>
+	<div class="col-md-5">
+		<div class="panel panel-primary">
+		  <div class="panel-heading">
+		    <h3 class="panel-title"><%= @right.short_title %></h3>
+		  </div>
+		  <%= form_for(@tinder) do |f| %>
+		  <div class="panel-body">
+		  	<div style='background: url(<%= @right.image_url%>); background-size: 100% 100%' class='div-submit' onclick='sub_left()'>
+		  		<div class='overlay'>
+		  			<i class="fa fa-thumbs-up"></i>
+		  		</div>
+		  	</div>
+		  	<p style='font-size: 17px; margin-top: 15px; font-weight: bold'><%= @right.merchant_name%></p>
+		  	<p style='color: #d35400; font-size: 26px;'>
+		  		<span style='text-decoration:line-through'><%= number_to_currency(@right.feature_value, :precision => 0) %></span>
+		  		<span style='font-weight: bold'><%= number_to_currency(@right.feature_price, :precision => 0) %></span>
+		  	</p>
+		  	<%= @right.description.html_safe %> 
+	    	<%= f.hidden_field :winner_id, :value => @right.deal_id %>
+	    	<%= f.hidden_field :loser_id, :value => @left.deal_id %>
+		  </div>
+		  <% end %>
+		</div>
+	</div>
+</div>
+
+<script>
+function sub_left(){
+	document.forms[0].submit()
+}
+function sub_right(){
+	document.forms[1].submit()
+}
+</script>

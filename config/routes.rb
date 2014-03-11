@@ -1,6 +1,7 @@
 LivingTinder::Application.routes.draw do
       
-  root "pages#home"
+  resources :tinders, only: [:new, :create]
+
+  root "tinders#new"
   
-  get "/home", to: "pages#home", as: "home"
 end
