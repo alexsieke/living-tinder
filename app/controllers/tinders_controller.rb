@@ -15,6 +15,8 @@ class TindersController < ApplicationController
   # POST /tinders.json
   def create
     @tinder = Tinder.new(tinder_params)
+    @tinder.user_id = session[:current_user_id]
+    
     if @tinder.save
       redirect_to new_tinder_path
     end
