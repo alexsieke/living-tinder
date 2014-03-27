@@ -1,0 +1,74 @@
+<%= debug(params) %>
+
+<div class="row" style='margin-top: 10px'>
+	<div class="col-md-5 col-md-offset-1">
+		<div class="panel panel-primary">
+		  <div class="panel-heading">
+		    <h3 class="panel-title"><%= @deal.short_title %></h3>
+		  </div>
+		  <div class="panel-body">
+		  	<div style='background: url(<%= @deal.image_url%>); background-size: 100% 100%' class='div-submit'>
+		  	</div>
+		  	<p style='font-size: 17px; margin-top: 15px; font-weight: bold'><%= @deal.merchant_name%></p>
+		  	<p style='color: #d35400; font-size: 26px;'>
+		  		<span style='text-decoration:line-through'><%= number_to_currency(@deal.feature_value, :precision => 0) %></span>
+		  		<span style='font-weight: bold'><%= number_to_currency(@deal.feature_price, :precision => 0) %></span>
+		  	</p>
+		  	<%= @deal.description.html_safe %>
+		  </div>
+	  	 <div class="panel-footer">
+	    	<span style='font-size: 9px; line-height: 10px'>
+	    		Created: <%= @deal.created_at.strftime("%-m/%-d/%Y %l:%M %P") %><br>
+	    		Starting: <%= @deal.offer_starts_at %>
+	    	</span>
+	    </div>
+		</div>
+	</div>
+	<div class="col-md-5">
+		<% Tag.all.each do |t| %>
+			<button style='margin: 5px;' class="btn btn-default" onclick='select(this)' id ="<%= t.id %>"><%= t.name %></button>
+		<% end %>
+
+		<hr>
+
+		<%= form_for(@deal_tag) do |f| %>
+			<%= f.submit "Add Tags", :class => "btn btn-success" %>
+			<%= f.hidden_field "json", :value => "" %>
+			<%= f.hidden_field :deal_id, :value => @deal.id %>
+		<% end %>
+	</div>
+</div>
+
+<script>
+var tags = []
+
+function select(el){
+
+	var id = parseInt($(el).attr("id"));
+
+	if(inArray(id,tags)){
+		$(el).removeClass("btn-primary");
+		var index = tags.indexOf(id);
+		if (index > -1) {
+    	tags.splice(index, 1);
+		}
+	}else{
+		tags.push(id);
+		$(el).addClass("btn-primary");
+	}
+	
+	$(el).blur();
+	$("#deal_tag_json").val(JSON.stringify(tags))
+	console.log(JSON.stringify(tags));
+}
+
+function inArray(needle, haystack) {
+    var length = haystack.length;
+    for(var i = 0; i < length; i++) {
+        if(haystack[i] == needle) return true;
+    }
+    return false;
+}
+
+
+</script>
