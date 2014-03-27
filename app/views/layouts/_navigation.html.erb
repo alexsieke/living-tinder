@@ -13,6 +13,9 @@
         <li><%= link_to "Tag Deals", new_deal_tag_path %></li>
         <li><%= link_to "Manage Tags", tags_path %></li>
       </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li><%= link_to session[:current_user_name], home_path %></li>
+      </ul>
     </div>
   </div>
 </nav>

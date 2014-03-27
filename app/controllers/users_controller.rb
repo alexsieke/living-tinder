@@ -2,6 +2,9 @@ class UsersController < ApplicationController
 
   # GET /users/new
   def new
+    if !session[:current_user_id].nil?
+      redirect_to home_path
+    end
     @user = User.new
   end
 

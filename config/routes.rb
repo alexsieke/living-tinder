@@ -12,5 +12,7 @@ LivingTinder::Application.routes.draw do
 
   root "users#new"
 
+  get 'home' => "pages#home"
+
   
 end
