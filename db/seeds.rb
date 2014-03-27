@@ -36,5 +36,31 @@ open("http://rainman.livingsocial.com/data/future_deals.txt", :http_basic_authen
     puts i
     i = i + 1
   end
-
 end
+
+Tag.delete_all
+Tag.create(:category => "Features", :name => "Reservations")
+Tag.create(:category => "Features", :name => "Take-out")
+Tag.create(:category => "Features", :name => "Delivery")
+Tag.create(:category => "Features", :name => "Parking")
+Tag.create(:category => "Features", :name => "Groups")
+Tag.create(:category => "Features", :name => "Free WiFi")
+Tag.create(:category => "Features", :name => "Dressy")
+Tag.create(:category => "Features", :name => "Alcohol")
+Tag.create(:category => "Features", :name => "Has TVs")
+Tag.create(:category => "Cuisine", :name => "Asian")
+Tag.create(:category => "Cuisine", :name => "American")
+Tag.create(:category => "Cuisine", :name => "Fusion")
+Tag.create(:category => "Cuisine", :name => "Thai")
+Tag.create(:category => "Cuisine", :name => "Indian")
+Tag.create(:category => "Cuisine", :name => "Kabob")
+Tag.create(:category => "Cuisine", :name => "Chinese")
+Tag.create(:category => "Cuisine", :name => "Tex-Mex")
+Tag.create(:category => "Cuisine", :name => "Brazilian")
+Tag.create(:category => "Event", :name => "Date Night")
+Tag.create(:category => "Event", :name => "Kid Friendly")
+Tag.create(:category => "Event", :name => "Romantic")
+Tag.create(:category => "Event", :name => "Casual")
+Tag.create(:category => "Event", :name => "Elite Pregame")
+Tag.create(:category => "Event", :name => "Good for Bros")
+

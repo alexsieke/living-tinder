@@ -5,6 +5,9 @@ class DealTagsController < ApplicationController
     if session[:current_user_id].nil?
       redirect_to root_path
     end
+
+    @tag_categories = Tag.uniq.pluck(:category)
+
     @deal_tag = DealTag.new
     @maxtime = Deal.maximum('created_at') - 1.day
 
@@ -28,7 +31,6 @@ class DealTagsController < ApplicationController
       @tags.each do |t|
         DealTag.create(:user_id => session[:current_user_id], :deal_id => params[:deal_tag][:deal_id], :tag_id => t)
       end
-      flash[:notice] = "Tags Added";
       redirect_to new_deal_tag_path
     rescue
       flash[:error] = "Need to Add At Least 1 Tag"

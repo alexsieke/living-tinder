@@ -1,10 +1,13 @@
 <h3>Displaying Tags</h3>
 <p>Description Goes Here</p>
 
+
+
 <table class="table table-striped">
   <thead>
     <tr>
       <th>Name</th>
+      <th>Category</th>
       <th></th>
     </tr>
   </thead>
@@ -13,6 +16,7 @@
     <% @tags.each do |tag| %>
       <tr>
         <td><%= tag.name %></td>
+        <td><%= tag.category %></td>
         <td><%= link_to 'Destroy', tag, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
@@ -21,4 +25,14 @@
 
 <br>
 
+<h3>Add a New Tag</h3>
 <%= render "tags/form" %>
+
+<script>
+  $(function() {
+    var availableTags = <%= @categories.to_json %>;
+    $( "#tags" ).autocomplete({
+      source: availableTags
+    });
+  });
+  </script>

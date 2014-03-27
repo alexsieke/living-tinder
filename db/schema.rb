@@ -65,6 +65,7 @@ ActiveRecord::Schema.define(version: 20140327171631) do
 
   create_table "tags", force: true do |t|
     t.string   "name"
+    t.string   "category"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -79,7 +80,7 @@ ActiveRecord::Schema.define(version: 20140327171631) do
 
   create_table "users", force: true do |t|
     t.string   "name"
-    t.date     "dob"
+    t.integer  "birthyear"
     t.string   "gender"
     t.datetime "created_at"
     t.datetime "updated_at"

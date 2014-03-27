@@ -9,13 +9,18 @@
     </div>
     <div class="collapse navbar-collapse">
       <ul class="nav navbar-nav">
-        <li class="active"><%= link_to "Tinder", new_tinder_path %></li>
+      <% if !session[:current_user_id].nil? %>
+        <li><%= link_to "Tinder", new_tinder_path %></li>
         <li><%= link_to "Tag Deals", new_deal_tag_path %></li>
-        <li><%= link_to "Manage Tags", tags_path %></li>
+      <% end %>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li><%= link_to session[:current_user_name], home_path %></li>
+      <% if !session[:current_user_id].nil? %>
+        <li><%= link_to session[:current_user_name], home_path %></li> 
+        <li><%= link_to "Sign Out", signout_path %></li>    
+      <% end %>
       </ul>
     </div>
   </div>
 </nav>
+
