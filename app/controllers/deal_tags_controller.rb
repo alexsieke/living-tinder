@@ -18,7 +18,6 @@ class DealTagsController < ApplicationController
       @deal = Deal.find(params[:deal_id])
     else
       @deals = Deal.find_by_sql("Select * from deals where id not in (select distinct(deal_id) from deal_tags where user_id = #{session[:current_user_id]}) order by random()")
-      
       @deal = @deals[0]
     end
 

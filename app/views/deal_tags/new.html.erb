@@ -18,11 +18,12 @@
 		  <div class="panel-body">
 		  	<div style='background: url(<%= @deal.image_url%>); background-size: 100% 100%' class='div-submit'>
 		  	</div>
-		  	<p style='font-size: 17px; margin-top: 15px; font-weight: bold'><%= @deal.merchant_name%></p>
+		  	<p style='font-size: 22px; margin-top: 15px; font-weight: bold'><%= @deal.merchant_name%></p>
 		  	<p style='color: #d35400; font-size: 26px;'>
 		  		<span style='text-decoration:line-through'><%= number_to_currency(@deal.feature_value, :precision => 0) %></span>
 		  		<span style='font-weight: bold'><%= number_to_currency(@deal.feature_price, :precision => 0) %></span>
 		  	</p>
+		  	<h4><%= @deal.city_name %>, <%= @deal.dma %></h4>
 		  	<%= @deal.description.html_safe %>
 		  </div>
 	  	 <div class="panel-footer">
