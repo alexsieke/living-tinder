@@ -1,5 +1,8 @@
 require 'open-uri'
 
+Deal.delete_all
+Dma.delete_all
+DealTag.delete_all
 puts "=============================="
 puts "Getting Deals"
 puts "=============================="
@@ -37,30 +40,47 @@ open("http://rainman.livingsocial.com/data/future_deals.txt", :http_basic_authen
     i = i + 1
   end
 end
-
+puts "=============================="
+puts "Getting Tags"
+puts "=============================="
 Tag.delete_all
-Tag.create(:category => "Features", :name => "Reservations")
-Tag.create(:category => "Features", :name => "Take-out")
-Tag.create(:category => "Features", :name => "Delivery")
-Tag.create(:category => "Features", :name => "Parking")
-Tag.create(:category => "Features", :name => "Groups")
-Tag.create(:category => "Features", :name => "Free WiFi")
-Tag.create(:category => "Features", :name => "Dressy")
-Tag.create(:category => "Features", :name => "Alcohol")
-Tag.create(:category => "Features", :name => "Has TVs")
-Tag.create(:category => "Cuisine", :name => "Asian")
-Tag.create(:category => "Cuisine", :name => "American")
-Tag.create(:category => "Cuisine", :name => "Fusion")
-Tag.create(:category => "Cuisine", :name => "Thai")
-Tag.create(:category => "Cuisine", :name => "Indian")
-Tag.create(:category => "Cuisine", :name => "Kabob")
-Tag.create(:category => "Cuisine", :name => "Chinese")
-Tag.create(:category => "Cuisine", :name => "Tex-Mex")
-Tag.create(:category => "Cuisine", :name => "Brazilian")
-Tag.create(:category => "Event", :name => "Date Night")
-Tag.create(:category => "Event", :name => "Kid Friendly")
-Tag.create(:category => "Event", :name => "Romantic")
-Tag.create(:category => "Event", :name => "Casual")
-Tag.create(:category => "Event", :name => "Elite Pregame")
-Tag.create(:category => "Event", :name => "Good for Bros")
+Tag.create(:category => "Ambiance", :name => "Fancy")
+Tag.create(:category => "Ambiance", :name => "Casual")
+Tag.create(:category => "Ambiance", :name => "Romantic")
+Tag.create(:category => "Ambiance", :name => "Loud")
+Tag.create(:category => "Ambiance", :name => "Girls Night")
+Tag.create(:category => "Ambiance", :name => "Laid Back")
+Tag.create(:category => "Ambiance", :name => "Dressy")
+Tag.create(:category => "Ambiance", :name => "Date Night")
+
+Tag.create(:category => "Destination", :name => "Walkable / Downtown")
+Tag.create(:category => "Destination", :name => "Cool Neighborhood")
+Tag.create(:category => "Destination", :name => "Suburban")
+Tag.create(:category => "Destination", :name => "Public Transit")
+Tag.create(:category => "Destination", :name => "Franchise")
+Tag.create(:category => "Destination", :name => "Independent")
+Tag.create(:category => "Destination", :name => "Shopping Center")
+
+Tag.create(:category => "Outings", :name => "Family")
+Tag.create(:category => "Outings", :name => "Just the Gals")
+Tag.create(:category => "Outings", :name => "Just the Girls")
+Tag.create(:category => "Outings", :name => "Big Parties")
+Tag.create(:category => "Outings", :name => "Quiet")
+Tag.create(:category => "Outings", :name => "Birthdays")
+Tag.create(:category => "Outings", :name => "Corporate")
+Tag.create(:category => "Outings", :name => "Daytime")
+Tag.create(:category => "Outings", :name => "Nighttime")
+
+Tag.create(:category => "Gift Ideas", :name => "For Mom")
+Tag.create(:category => "Gift Ideas", :name => "For Dad")
+Tag.create(:category => "Gift Ideas", :name => "For Him")
+Tag.create(:category => "Gift Ideas", :name => "For Her")
+Tag.create(:category => "Gift Ideas", :name => "For Kids")
+Tag.create(:category => "Gift Ideas", :name => "Anniversary")
+Tag.create(:category => "Gift Ideas", :name => "Birthday")
+Tag.create(:category => "Gift Ideas", :name => "Housewarming")
+Tag.create(:category => "Gift Ideas", :name => "Personalized")
+
+
+
 
