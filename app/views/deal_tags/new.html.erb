@@ -1,5 +1,15 @@
+<% if @deals.count > 0 %>
+
 <div class="row" style='margin-top: 10px'>
-	<div class="col-md-5 col-md-offset-1">
+	<div class="col-md-12">
+		<div class="well">
+			<h4>Total Deals Tagged: <span style='color: green'><%= @num_deals %></span></h4>
+		</div>
+	</div>
+</div>
+
+<div class="row" style='margin-top: 10px'>
+	<div class="col-md-5">
 		<div class="panel panel-primary">
 		  <div class="panel-heading">
 		    <h3 class="panel-title"><%= @deal.short_title %></h3>
@@ -22,9 +32,10 @@
 	    </div>
 		</div>
 	</div>
-	<div class="col-md-5">
+	<div class="col-md-7">
 		<h4>Select Tags for this Deal</h4>
-		<%= link_to "Manage Tags", tags_path, :style => "float: right; margin-top: -30px" %>
+		<p>Research the deal on the left and select the appropriate tags that define the dining experience / restaurant</p>
+		<p>When you are finished click "add tags" to be taken to the next deal</p>
 		<hr>
 		<% @tag_categories.each do |c| %>
 			<h4><%= c %></h4>
@@ -42,6 +53,12 @@
 		<% end %>
 	</div>
 </div>
+
+<% else %>
+
+<center><h1>No More Deals</h1></center>
+
+<% end %>
 
 <script>
 var tags = []

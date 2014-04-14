@@ -23,7 +23,7 @@ class UsersController < ApplicationController
       if @user.save
         session[:current_user_id] = @user.id
         session[:current_user_name] = @user.name
-        format.html { redirect_to home_path }
+        format.html { redirect_to new_deal_tag_path }
       else
         format.html { render action: 'new' }
       end

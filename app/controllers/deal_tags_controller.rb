@@ -9,15 +9,17 @@ class DealTagsController < ApplicationController
     @tag_categories = Tag.uniq.pluck(:category)
 
     @deal_tag = DealTag.new
-    @maxtime = Deal.maximum('created_at') - 1.day
+    @maxtime = DateTime.now
+
+    @num_deals = DealTag.where(:user_id => session[:current_user_id]).distinct.count(:deal_id)
+    @tagged_deals = DealTag.select(:deal_id).where(:user_id => session[:current_user_id]).uniq
 
     if !params[:deal_id].blank?
       @deal = Deal.find(params[:deal_id])
-      if @deal.nil?
-        @deal = Deal.where('created_at >= ?', @maxtime).first(:order => "RANDOM()")
-      end
     else
-       @deal = Deal.where('created_at >= ?', @maxtime).first(:order => "RANDOM()")
+      @deals = Deal.find_by_sql("Select * from deals where id not in (select distinct(deal_id) from deal_tags where user_id = #{session[:current_user_id]}) order by random()")
+      
+      @deal = @deals[0]
     end
 
   end
