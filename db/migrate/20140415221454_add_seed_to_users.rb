@@ -1,5 +1,5 @@
 class AddSeedToUsers < ActiveRecord::Migration
   def change
-  	add_column :users, :seed, :integer
+  	add_column :users, :seed, :bigint
   end
 end
