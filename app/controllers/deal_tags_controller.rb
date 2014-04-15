@@ -11,8 +11,13 @@ class DealTagsController < ApplicationController
     @deal_tag = DealTag.new
     @maxtime = DateTime.now + 1.days
 
-    @num_deals = DealTag.where(:user_id => session[:current_user_id]).distinct.count(:deal_id)
+    @num_deals = DealStat.where(:user_id => session[:current_user_id]).distinct.count(:deal_id)
     @tagged_deals = DealTag.select(:deal_id).where(:user_id => session[:current_user_id]).uniq
+
+    if @num_deals >= 25
+      session[:finished] = 1
+      redirect_to home_path
+    end
 
     if !params[:deal_id].blank?
       @deal = Deal.find(params[:deal_id])
@@ -27,11 +32,18 @@ class DealTagsController < ApplicationController
   # POST /deal_tags.json
   def create
 
-    begin 
+    puts "%%%%%%%%%%%%%%%%%%%%%%%%%"
+    puts params.to_yaml
+    puts "%%%%%%%%%%%%%%%%%%%%%%%%%"
+
+    begin
       @tags = JSON.parse(params[:deal_tag][:json])
+      DealStat.create(:user_id => session[:current_user_id], :deal_id => params[:deal_tag][:deal_id], :time => params[:deal_tag][:duration], :num_tags => @tags.count)
+
       @tags.each do |t|
         DealTag.create(:user_id => session[:current_user_id], :deal_id => params[:deal_tag][:deal_id], :tag_id => t)
       end
+
       redirect_to new_deal_tag_path
     rescue
       flash[:error] = "Need to Add At Least 1 Tag"

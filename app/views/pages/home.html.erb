@@ -1,3 +1,18 @@
 
-<h3>LivingTinder</h3>
-Welcome: <%= session[:current_user_name] %>
+<% if !@code.blank? %>
+	<h3>Thank you for tagging</h3>
+	<h4>Your Code:</h4>
+	<p>Don't lose this we won't be able to generate it again</p>
+	<div class="well"><h1><%= @code %></h1></div>
+<% else %>
+	<h3>Welcome: <%= session[:current_user_name] %></h3>
+
+	<h4>Instructions</h4>
+	<ol style='font-size: 17px'>
+		<li>You will be presented with 25 deals</li>
+		<li>For each deal, click the relevent tags that correspond to the type of experience / restaurant</li>
+		<li>When you have finished tagging, you will be presented with a code for mechanical turk</li>
+	</ol>
+
+	<%= link_to "Start Tagging", new_deal_tag_path, :class => "btn btn-primary", :style => 'padding: 25px 100px; font-size: 36px' %>
+<% end %>

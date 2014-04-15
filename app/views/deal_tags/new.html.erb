@@ -1,10 +1,10 @@
-<% if @deals.count > 0 %>
+
+<% if session[:finished] == 0 %>
 
 <div class="row" style='margin-top: 10px'>
 	<div class="col-md-12">
 		<div class="well">
-			<h4>Total Deals Tagged: <span style='color: green'><%= @num_deals %></span>
-			<span style='float: right; color: #aaa; font-size: 15px; font-weight: normal'> (deals remaining: <%= @deals.count %>)</span></h4>
+			<h4>Total Deals Tagged: <span style='color: green'><%= @num_deals %> </span> / 25
 		</div>
 	</div>
 </div>
@@ -49,21 +49,34 @@
 		<hr>
 
 		<%= form_for(@deal_tag) do |f| %>
-			<%= f.submit "Add Tags", :class => "btn btn-success" %>
+			<%= f.submit "Add Tags", :class => "btn btn-success", :onclick => "return endTimer();" %>
 			<%= f.hidden_field "json", :value => "" %>
 			<%= f.hidden_field :deal_id, :value => @deal.id %>
+			<%= f.hidden_field "duration", :value => 0 %>
 		<% end %>
 	</div>
 </div>
 
-<% else %>
-
-<center><h1>No More Deals</h1></center>
-
 <% end %>
 
+
 <script>
+var start;
+var end;
+
+$(function() {
+	var currentTime = new Date();
+	start = currentTime.getTime();
+});
+
 var tags = []
+
+function endTimer(){
+	var currentTime = new Date()
+	end = currentTime.getTime();
+	$("#deal_tag_duration").val((end - start));
+	return true;
+}
 
 function select(el){
 

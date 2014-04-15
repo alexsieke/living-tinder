@@ -3,6 +3,11 @@ require 'open-uri'
 Deal.delete_all
 Dma.delete_all
 DealTag.delete_all
+DealStat.delete_all
+User.delete_all
+Tag.delete_all
+
+
 puts "=============================="
 puts "Getting Deals"
 puts "=============================="
@@ -43,7 +48,6 @@ end
 puts "=============================="
 puts "Getting Tags"
 puts "=============================="
-Tag.delete_all
 Tag.create(:category => "Ambiance", :name => "Fancy")
 Tag.create(:category => "Ambiance", :name => "Casual")
 Tag.create(:category => "Ambiance", :name => "Romantic")
@@ -62,7 +66,7 @@ Tag.create(:category => "Destination", :name => "Independent")
 Tag.create(:category => "Destination", :name => "Shopping Center")
 
 Tag.create(:category => "Outings", :name => "Family")
-Tag.create(:category => "Outings", :name => "Just the Gals")
+Tag.create(:category => "Outings", :name => "Just the Guys")
 Tag.create(:category => "Outings", :name => "Just the Girls")
 Tag.create(:category => "Outings", :name => "Big Parties")
 Tag.create(:category => "Outings", :name => "Quiet")

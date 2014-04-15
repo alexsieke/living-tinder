@@ -17,13 +17,16 @@ class UsersController < ApplicationController
     @years = (1950..2000)
     @selected = user_params[:birthyear]
 
-    @user = User.new(:name => user_params[:name], :birthyear => user_params[:birthyear], :gender => params[:gender])
+    session[:turk_seed] = rand(1000000000000)
+    session[:finished] = 0
+
+    @user = User.new(:name => user_params[:name], :birthyear => user_params[:birthyear], :gender => params[:gender], :seed => session[:turk_seed])
 
     respond_to do |format|
       if @user.save
         session[:current_user_id] = @user.id
         session[:current_user_name] = @user.name
-        format.html { redirect_to new_deal_tag_path }
+        format.html { redirect_to home_path }
       else
         format.html { render action: 'new' }
       end

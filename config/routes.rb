@@ -6,8 +6,6 @@ LivingTinder::Application.routes.draw do
 
   resources :deals, only: [:index, :show]
 
-  resources :tinders, only: [:new, :create]
-
   root "users#new"
 
   get 'home' => "pages#home"

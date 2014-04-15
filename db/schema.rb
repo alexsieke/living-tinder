@@ -11,7 +11,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140327171631) do
+ActiveRecord::Schema.define(version: 20140415221454) do
+
+  create_table "deal_stats", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "deal_id"
+    t.integer  "time"
+    t.integer  "num_tags"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "deal_stats", ["deal_id"], name: "index_deal_stats_on_deal_id"
+  add_index "deal_stats", ["user_id"], name: "index_deal_stats_on_user_id"
 
   create_table "deal_tags", force: true do |t|
     t.integer  "deal_id"
@@ -42,6 +54,7 @@ ActiveRecord::Schema.define(version: 20140327171631) do
     t.string   "sales_rep"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "number_tags"
   end
 
   create_table "dmas", force: true do |t|
@@ -84,6 +97,7 @@ ActiveRecord::Schema.define(version: 20140327171631) do
     t.string   "gender"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "seed"
   end
 
 end
