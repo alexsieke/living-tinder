@@ -9,7 +9,7 @@ class DealTagsController < ApplicationController
     @tag_categories = Tag.uniq.pluck(:category)
 
     @deal_tag = DealTag.new
-    @maxtime = DateTime.now + 1.days
+    @maxtime = DateTime.now
 
     @num_deals = DealStat.where(:user_id => session[:current_user_id]).distinct.count(:deal_id)
     @tagged_deals = DealTag.select(:deal_id).where(:user_id => session[:current_user_id]).uniq
@@ -22,7 +22,7 @@ class DealTagsController < ApplicationController
     if !params[:deal_id].blank?
       @deal = Deal.find(params[:deal_id])
     else
-      @deals = Deal.find_by_sql ["Select * from deals where offer_starts_at >= ? and id not in (select distinct(deal_id) from deal_tags where user_id = #{session[:current_user_id]}) order by random()", @maxtime ]
+      @deals = Deal.find_by_sql ["Select * from deals where offer_ends_at <= ? and id not in (select distinct(deal_id) from deal_tags where user_id = #{session[:current_user_id]}) order by random()", @maxtime ]
       @deal = @deals[0]
     end
 

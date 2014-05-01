@@ -11,6 +11,7 @@ LivingTinder::Application.routes.draw do
   get 'home' => "pages#home"
 
   get 'signout' => 'users#destroy'
+  get 'viewdeals' => 'pages#viewdeals'
 
   
 end

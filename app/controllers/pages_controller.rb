@@ -11,4 +11,8 @@ class PagesController < ApplicationController
     end
 	end
 
+	def viewdeals
+		@deals = Deal.find(1313)
+	end
+
 end
