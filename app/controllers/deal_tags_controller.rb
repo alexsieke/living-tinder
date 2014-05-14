@@ -6,15 +6,15 @@ class DealTagsController < ApplicationController
       redirect_to root_path
     end
 
-    @tag_categories = Tag.uniq.pluck(:category)
+    
 
     @deal_tag = DealTag.new
-    @maxtime = DateTime.now
+    @maxtime = DateTime.now + 1.day
 
     @num_deals = DealStat.where(:user_id => session[:current_user_id]).distinct.count(:deal_id)
     @tagged_deals = DealTag.select(:deal_id).where(:user_id => session[:current_user_id]).uniq
 
-    if @num_deals >= 25
+    if @num_deals > 25
       session[:finished] = 1
       redirect_to home_path
     end
@@ -22,9 +22,18 @@ class DealTagsController < ApplicationController
     if !params[:deal_id].blank?
       @deal = Deal.find(params[:deal_id])
     else
-      @deals = Deal.find_by_sql ["Select * from deals where offer_ends_at <= ? and id not in (select distinct(deal_id) from deal_tags where user_id = #{session[:current_user_id]}) order by random()", @maxtime ]
+      @deals = Deal.find_by_sql ["Select * from deals where offer_starts_at > ? and id not in (select distinct(deal_id) from deal_tags where user_id = #{session[:current_user_id]}) order by rand()", @maxtime ]
       @deal = @deals[0]
     end
+
+    if @deal.category == "Full-Service Restaurant" || @deal.category == "QSR/Fast Casual"
+      @ls_category = "Restaurants"
+    elsif @deal.category == "Beauty/Health"
+      @ls_category = "Beauty"
+    end
+
+    @tag_categories = Tag.where(:ls_category => @ls_category).uniq.pluck(:category)
+
 
   end
 
@@ -32,9 +41,7 @@ class DealTagsController < ApplicationController
   # POST /deal_tags.json
   def create
 
-    puts "%%%%%%%%%%%%%%%%%%%%%%%%%"
-    puts params.to_yaml
-    puts "%%%%%%%%%%%%%%%%%%%%%%%%%"
+
 
     begin
       @tags = JSON.parse(params[:deal_tag][:json])

@@ -1,4 +1,8 @@
 
+<%= debug(@tag_categories) %>
+
+
+
 <% if session[:finished] == 0 %>
 
 <div class="row" style='margin-top: 10px'>
@@ -36,13 +40,14 @@
 		</div>
 	</div>
 	<div class="col-md-7">
+		<h3>Category: <%= @deal.category %> </h3>
 		<h4>Select Tags for this Deal</h4>
 		<p>Research the deal on the left and select the appropriate tags that define the dining experience / restaurant</p>
 		<p>When you are finished click "add tags" to be taken to the next deal</p>
 		<hr>
 		<% @tag_categories.each do |c| %>
 			<h4><%= c %></h4>
-			<% Tag.where(:category => c).each do |t| %>
+			<% Tag.where(:category => c, :ls_category => @ls_category).each do |t| %>
 				<button style='margin: 5px;' class="btn btn-default" onclick='select(this)' id ="<%= t.id %>"><%= t.name %></button>
 			<% end %>
 		<% end %>

@@ -15,6 +15,9 @@ class CreateDeals < ActiveRecord::Migration
       t.float :feature_price
       t.float :feature_value
       t.string :sales_rep
+      t.string :category
+      t.string :subcategory
+      t.string :concept
 
       t.timestamps
     end

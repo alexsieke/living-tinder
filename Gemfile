@@ -9,6 +9,7 @@ gem 'turbolinks', '~> 2.1.0'
 gem 'jbuilder', '~> 1.5.3'
 gem 'bcrypt-ruby', '~> 3.1.2'
 gem 'jquery-ui-rails'
+gem 'mysql2'
 
 group :doc do
   gem 'sdoc', require: false
