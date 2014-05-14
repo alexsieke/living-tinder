@@ -14,5 +14,20 @@
 		<li>When you have finished tagging, you will be presented with a code for mechanical turk</li>
 	</ol>
 
-	<%= link_to "Start Tagging", new_deal_tag_path, :class => "btn btn-primary", :style => 'padding: 25px 100px; font-size: 36px' %>
+	<br><br><br>
+
+	<div id='linkbox' style='padding: 10px; background-color: #f3f3f3; width: 400px; height: 120px'>
+	<%= link_to "Start Tagging", new_deal_tag_path, :class => "btn btn-primary", :style => 'width: 100%; padding: 25px; font-size: 36px', :onclick => "clickLink()" %>
+	</div>
+
 <% end %>
+
+<script>
+
+// 
+
+function clickLink(){
+	$("#linkbox").html("<p style='font-size: 18px; font-weight: bold; text-align: center'>Initiating Tagging</p><img style='width: 100%' src='https://s3-us-west-2.amazonaws.com/siekels/ajax-loader.gif'>");
+}
+
+</script>
